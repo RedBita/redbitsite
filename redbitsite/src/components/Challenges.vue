@@ -13,19 +13,6 @@
   </v-row>
   -->
 
-    <v-row class="ma-0">
-      <v-toolbar dark color="black">
-        <v-text-field
-          v-model="search"
-          hide-no-data
-          hide-details
-          label="What challenge are you interested in?"
-          solo-inverted
-          append-icon="mdi-magnify"
-        ></v-text-field>
-      </v-toolbar>
-    </v-row>
-
     <v-row>
       <v-col class="mx-4">
         <v-card
