@@ -61,10 +61,26 @@ export default {
     ],
   }),
 
+  mounted: async function() {
+    this.challenges = await this.get_challenges_folder();scroll
+  },
+
   methods: {
     open_challenge: function (a) {
       this.$router.push("/challenges/" + a);
       console.log(a);
+    },
+
+    async get_challenges_folder() {
+      try {
+        const resp = await this.axios.get(
+          "https://api.github.com/repos/RedBita/redbita.github.io/contents/data/challenges"
+        );
+        console.log(resp.data)
+        return resp.data;
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };

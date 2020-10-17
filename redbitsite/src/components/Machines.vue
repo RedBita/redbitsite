@@ -173,7 +173,6 @@
       </v-col>
     </v-row>
 
-
   </div>
 </template>
 
@@ -186,7 +185,9 @@ export default {
   data: () => ({
     machines_to_show: [],
     retired_machines:[],
+    retired_machines_all:[],
     active_machines:[],
+    active_machines_all:[],
     search: "",
   }),
 
@@ -216,10 +217,14 @@ export default {
       return parseInt(a.points) - parseInt(b.points) + mid;
     });
 
+    this.active_machines_all = this.active_machines;
+
     this.retired_machines.sort(function (a, b) {
       var mid = a.done === b.done ? 0 : a.done ? -1 : 1;
       return parseInt(a.points) - parseInt(b.points) + mid;
     });
+
+    this.retired_machines_all = this.retired_machines;
 
   },
 
@@ -274,12 +279,16 @@ export default {
     },
     update_list: function () {
       var search_value = this.search;
-      var filteredArray = this.machines.filter(function (item) {
+      this.active_machines = this.active_machines_all.filter(function (item) {
         if (item.name.toLowerCase().includes(search_value.toLowerCase())) {
           return item;
         }
       });
-      this.machines_to_show = filteredArray;
+      this.retired_machines = this.retired_machines_all.filter(function (item) {
+        if (item.name.toLowerCase().includes(search_value.toLowerCase())) {
+          return item;
+        }
+      });
     },
     delayed_update: function () {
       if (this.timer) {
