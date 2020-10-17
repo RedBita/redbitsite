@@ -9,6 +9,7 @@ import Machines from '../src/components/Machines'
 import SingleMachine from '../src/components/SingleMachine'
 import Main from '../src/components/Main'
 import Challenges from '../src/components/Challenges'
+import NotFound from '../src/components/NotFound'
 
 Vue.config.productionTip = false
 
@@ -19,7 +20,8 @@ const routes = [
   { path: '/machines', component: Machines, name: "machines" },
   { path: '/machines/:name', component: SingleMachine, name: "single" },
   { path: '/challenges', component: Challenges, name:"challenges" },
-  { path: '/', component: Main, name:"home"  }
+  { path: '/', component: Main, name:"home"  },
+  { path: '*', component: NotFound}
 ]
 
 const router = new VueRouter({  
