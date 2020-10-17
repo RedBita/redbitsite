@@ -183,7 +183,6 @@ export default {
   name: "HelloWorld",
 
   data: () => ({
-    machines_to_show: [],
     retired_machines:[],
     retired_machines_all:[],
     active_machines:[],

@@ -14,6 +14,9 @@ if [ $choice -gt 2 ]; then
 
 fi
 
+#always check updates
+
+git pull
 
 if [ $choice -gt 1 ]; then 
     echo "building..."

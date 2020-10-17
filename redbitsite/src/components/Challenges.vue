@@ -55,14 +55,11 @@ export default {
 
   data: () => ({
     search: "",
-    challenges: [
-      { name: "Reply Cyber Security challenge 2020", path: "rcs2020" },
-      { name: "Reply Cyber Security challenge 2019", path: "rcs2019" },
-    ],
+    challenges: [],
   }),
 
   mounted: async function() {
-    this.challenges = await this.get_challenges_folder();scroll
+    this.challenges = await this.get_challenges_folder();
   },
 
   methods: {
@@ -76,7 +73,13 @@ export default {
         const resp = await this.axios.get(
           "https://api.github.com/repos/RedBita/redbita.github.io/contents/data/challenges"
         );
-        console.log(resp.data)
+
+        //make some refactor
+        resp.data.forEach(element => {
+          element["path"] = element.name
+          element["name"] = element.name.replaceAll("_", " ")
+        });
+
         return resp.data;
       } catch (err) {
         console.error(err);
