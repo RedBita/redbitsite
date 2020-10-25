@@ -21,7 +21,25 @@
       <h1>Active machines</h1>
     </v-row>
 
-    <v-row class="px-2 py-2 ma-0">
+    <v-row v-if="!loaded" class="px-2 py-2 ma-0">
+
+      <v-col 
+        cols="12"
+        sm="12"
+        md="3"
+        v-for="index in 4"
+        :key="index"
+      >
+         <v-skeleton-loader
+          height="38%"
+          v-bind="attrs"
+          type="card-avatar, article, actions"
+        ></v-skeleton-loader>
+      </v-col>
+
+    </v-row>
+
+    <v-row v-else class="px-2 py-2 ma-0">
       <v-col
         cols="12"
         sm="12"
@@ -100,8 +118,28 @@
       <h1>Retired machines</h1>
     </v-row>
 
-    <v-row class="px-2 py-2 ma-0">
-      <v-col
+    <!-- loaders -->
+
+    <v-row v-if="!loaded" class="px-2 py-2 ma-0">
+
+       <v-col 
+        cols="12"
+        sm="12"
+        md="3"
+        v-for="index in 4"
+        :key="index"
+      >
+          <v-skeleton-loader
+          height="38%"
+          v-bind="attrs"
+          type="card-avatar, article, actions"
+        ></v-skeleton-loader>
+      </v-col>
+
+    </v-row>
+
+    <v-row v-else class="px-2 py-2 ma-0">
+      <v-col 
         cols="12"
         sm="12"
         md="3"
@@ -188,6 +226,7 @@ export default {
     active_machines:[],
     active_machines_all:[],
     search: "",
+    loaded: false
   }),
 
   mounted: async function () {
@@ -208,6 +247,8 @@ export default {
       }else{
         this.active_machines.push(element)
       }
+
+      this.loaded = true
 
     });
 
