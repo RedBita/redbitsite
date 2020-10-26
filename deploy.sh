@@ -10,7 +10,11 @@ read choice
 if [ $choice -gt 2 ]; then
     echo "scraper"
 
-    TODO
+    cd data-scraper
+
+    python3 scrape_all_machines.py
+
+    cd ..
 
 fi
 
