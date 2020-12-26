@@ -21,6 +21,12 @@
       <h1>Active machines</h1>
     </v-row>
 
+    <v-row class="d-flex justify-center">
+      <div class="banner">
+        Qui andranno dellealtre scritte
+      </div>
+    </v-row>
+
     <v-row v-if="!loaded" class="px-2 py-2 ma-0">
 
       <v-col 
@@ -358,5 +364,15 @@ export default {
 
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
+}
+
+.banner{
+  padding:10px;
+  margin: 20px;
+  width: 95%;
+  height: 10%;
+  text-align: center;
+  background-color: red;
+  border-radius: 5px;
 }
 </style>
