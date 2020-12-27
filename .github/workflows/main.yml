@@ -19,7 +19,7 @@ jobs:
         env:
           HACKTHEBOXKEY:  ${{secrets.API_KEY}}
 
-      - name: Deploy 🚀
+      - name: Deploy test 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
