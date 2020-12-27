@@ -24,6 +24,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.TOKEN_REDBIT }}
-          BRANCH: master
+          BRANCH: gh-pages
           FOLDER: redbitsite/dist
           REPOSITORY_NAME: RedBita/redbita.github.io
