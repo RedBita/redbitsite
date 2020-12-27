@@ -14,6 +14,7 @@ jobs:
 
       - name: Install and Build test 🔧
         run: |
+          chmod +x ./deploy2.sh
           ./deploy2.sh
         env:
           HACKTHEBOXKEY:  ${{secrets.API_KEY}}
