@@ -22,8 +22,10 @@
     </v-row>
 
     <v-row class="d-flex justify-center">
-      <div class="banner">
-        Qui andranno dellealtre scritte
+      <div class="banner" style="color:black">
+        <p>For the active machine you'll need the root hash:</p>
+        <p>Linux root => <span style="color:white">$6$YIFGN9YscCV72BjFtx/tehbc7sQTJp09c5</span>:18277:0:99999:7:::</p>
+        <p>Windows => :admin::xxxxxx:xxxxxxx:<span style="color:white">xxxxxxx</span></p>                
       </div>
     </v-row>
 
