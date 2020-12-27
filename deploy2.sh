@@ -26,4 +26,4 @@ npm run build
 cd ..
 
 #copy data directory into docs
-cp -r data redbitsite/data
+cp -r data redbitsite/dist/data
