@@ -26,4 +26,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: master
           FOLDER: redbitsite/dist
-          REPOSITORY_NAME: redbita.github.io
+          REPOSITORY_NAME: RedBita/redbita.github.io
