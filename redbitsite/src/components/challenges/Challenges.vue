@@ -42,30 +42,52 @@ export default {
 
   data: () => ({
     search: "",
+    path: "",
     challenges: [],
   }),
 
-  mounted: async function() {
+  watch: {
+    $route: async function () {
+      if (this.$route.params.path != undefined) {
+        this.path = this.$route.params.path + "/";
+      } else {
+        this.path = "";
+      }
+      this.challenges = [];
+      this.challenges = await this.get_challenges_folder();
+    },
+  },
+
+  mounted: async function () {
     this.challenges = await this.get_challenges_folder();
   },
 
   methods: {
     open_challenge: function (a) {
-      this.$router.push("/challenges/" + a);
-      console.log(a);
+      this.$router.push("/challenges/" + this.path + a);
     },
 
     async get_challenges_folder() {
       try {
         const resp = await this.axios.get(
-          "https://api.github.com/repos/RedBita/redbita.github.io/contents/data/challenges"
+          "https://api.github.com/repos/RedBita/redbita.github.io/contents/data2/challenges/" +
+            this.path
         );
 
+        var thereAreSomePdf = false;
         //make some refactor
-        resp.data.forEach(element => {
-          element["path"] = element.name
-          element["name"] = element.name.replaceAll("_", " ")
+        resp.data.forEach((element) => {
+          element["path"] = element.name;
+          element["name"] = element.name.replaceAll("_", " ");
+
+          if (element["name"].indexOf(".pdf") > 0) {
+            thereAreSomePdf = true;
+          }
         });
+
+        if (thereAreSomePdf) {          
+          this.$router.push("/write/challenges/" + this.$route.params.path);          
+        }
 
         return resp.data;
       } catch (err) {

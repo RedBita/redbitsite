@@ -1,25 +1,25 @@
 <template>
-  <v-row class="fill-height pa-0 ma-0">
-    <!--Column for data and other things-->
-    <v-col
-      v-if="!$vuetify.breakpoint.smAndDown"
-      class="fill-height pa-0 ma-0 align-stretch"
-      col="12"
-      md="3"
-      sm="0"
-    >
-      <h1 class="d-flex justify-center">{{ name }}</h1>
+  <div class="d-flex" style="height:100%">
+    <v-navigation-drawer permanent>
+      <h1 class="d-flex justify-center">{{ machine_info.name }}</h1>
       <v-row class="d-flex justify-center" width="100px"
-        ><v-img :src="machine_info.img" max-height="100" max-width="100"></v-img
+        ><v-img
+          :src="machine_info.avatar_thumb"
+          max-height="100"
+          max-width="100"
+        ></v-img
       ></v-row>
       <h3 class="d-flex justify-center">{{ machine_info.IP }}</h3>
       <v-row class="d-flex justify-center"
         ><h3 :class="getColor(machine_info.Difficulty)">
-          {{ machine_info.Difficulty }}
+          Difficulty: {{ machine_info.rating }}
         </h3>
       </v-row>
       <v-row class="d-flex justify-center"
-        ><h3>Released: {{ machine_info.Release }}</h3>
+        ><h3>Released: {{ machine_info.release }}</h3>
+      </v-row>
+      <v-row class="d-flex justify-center"
+        ><h3>Points: {{ machine_info.points }}</h3>
       </v-row>
       <v-row class="d-flex justify-center">
         <v-avatar class="ma-3" size="30" tile>
@@ -27,23 +27,24 @@
         </v-avatar>
       </v-row>
 
-      <v-row class="d-flex justify-center align-end align-stretch align-bottom">
-        <v-img
-          max-width="300"
-          src="https://www.hackthebox.eu/badge/image/371504"
-        ></v-img>
-      </v-row>
-    </v-col>
-    <!--Column for PDF visualization-->
-    <v-col col="12" md="9" sm="12" xs="12" class="pa-0 ma-0">
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-img
+            max-width="300"
+            src="https://www.hackthebox.eu/badge/image/371504"
+          ></v-img>
+        </div>
+      </template>
+    </v-navigation-drawer>
+    <v-main class="ma-0 pa-0">
       <iframe
         :src="filePath"
         width="100%"
         height="100%"
         style="border: none"
       ></iframe>
-    </v-col>
-  </v-row>
+    </v-main>
+  </div>
 </template>
 
 <script>
@@ -57,19 +58,24 @@ export default {
   }),
 
   mounted: function () {
+    this.filePath = this.$route.params.path;
+    let name = this.filePath.slice(this.filePath.lastIndexOf("/") + 1);
+    this.name = name.toLowerCase();
     var ind = array
       .map(function (e) {
         return e.name;
       })
-      .indexOf(this.$route.params.name);
+      .indexOf(name);
     this.machine_info = array[ind];
 
-    this.name = this.$route.params.name;
     this.filePath =
-      "https://redbita.github.io/data/machines/" +
+      "https://redbita.github.io/data2/" +
+      this.filePath.toLowerCase() +
+      "/" +
       this.name.toLowerCase() +
       ".pdf";
-    console.log(this.file);
+
+    console.log(this.filePath);
   },
 
   methods: {
