@@ -119,6 +119,7 @@ export default {
       this.filePath =
         this.dirPath.toLowerCase() + "/" + arrayOfWriteUps[0].name;
       this.arrayOfWriteUps = arrayOfWriteUps;
+      console.log(arrayOfWriteUps)
     },
     getOSImage: function (a) {
       if (a === "Linux") {
