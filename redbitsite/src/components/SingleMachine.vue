@@ -69,7 +69,7 @@ export default {
     this.machine_info = array[ind];
 
     this.filePath =
-      "https://redbita.github.io/data2/" +
+      "https://redbita.github.io/data/" +
       this.filePath.toLowerCase() +
       "/" +
       this.name.toLowerCase() +

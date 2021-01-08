@@ -27,9 +27,9 @@ import axios from "../plugins/axios/axios_data";
 export default {
   data: () => ({
     filePath: "",
-    dirPath: "https://redbita.github.io/data2/",
+    dirPath: "https://redbita.github.io/data/",
     apiEnd:
-      "https://api.github.com/repos/redbita/redbita.github.io/contents/data2/",
+      "https://api.github.com/repos/redbita/redbita.github.io/contents/data/",
     path: "",
     name,
     machine_info: {},
@@ -57,10 +57,7 @@ export default {
     } else {
       this.getFolderDetails();
       this.getWriteUpDetails();
-    }
-
-    this.filePath =
-      this.dirPath.toLowerCase() + "/" + this.name.toLowerCase() + ".pdf";
+    }    
   },
 
   methods: {
@@ -79,6 +76,7 @@ export default {
           item.name.indexOf(".pdf") > 0
         );
       });
+      this.filePath = this.dirPath.toLowerCase() + "/" + arrayOfWriteUps[0].name;      
       this.arrayOfWriteUps = arrayOfWriteUps;
     },
     getOSImage: function (a) {

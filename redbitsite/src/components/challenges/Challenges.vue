@@ -70,7 +70,7 @@ export default {
     async get_challenges_folder() {
       try {
         const resp = await this.axios.get(
-          "https://api.github.com/repos/RedBita/redbita.github.io/contents/data2/challenges/" +
+          "https://api.github.com/repos/RedBita/redbita.github.io/contents/data/challenges/" +
             this.path
         );
 
