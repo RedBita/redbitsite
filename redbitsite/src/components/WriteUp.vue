@@ -1,11 +1,46 @@
 <template>
   <div class="d-flex" style="height: 100%">
     <v-navigation-drawer permanent>
-      <h1 style="text-align: center">{{ writeup_info.name }}</h1>
+      <div v-if="machine_info != null">
+        <h1 style="text-align: center">{{ machine_info.name }}</h1>
+        <v-row class="d-flex justify-center" width="100px"
+          ><v-img
+            :src="machine_info.avatar_thumb"
+            max-height="100"
+            max-width="100"
+          ></v-img
+        ></v-row>
+        <h3 class="d-flex justify-center">{{ machine_info.IP }}</h3>
+        <v-row class="d-flex justify-center"
+          ><h3 :class="getColor(machine_info.Difficulty)">
+            Difficulty: {{ machine_info.rating }}
+          </h3>
+        </v-row>
+        <v-row class="d-flex justify-center"
+          ><h3>Released: {{ machine_info.release }}</h3>
+        </v-row>
+        <v-row class="d-flex justify-center"
+          ><h3>Points: {{ machine_info.points }}</h3>
+        </v-row>
+        <v-row class="d-flex justify-center">
+          <v-avatar class="ma-3" size="30" tile>
+            <v-img :src="getOSImage(machine_info.OS)"></v-img>
+          </v-avatar>
+        </v-row>
+      </div>
+
+      <div v-else>
+        <h1 style="text-align: center">CAIO</h1>
+      </div>
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-img v-for="author in arrayOfWriteUps" :key="author.text" max-width="300" :src="getAuthor(author.author)"></v-img>
+          <v-img
+            v-for="author in arrayOfWriteUps"
+            :key="author.text"
+            max-width="300"
+            :src="getAuthor(author.author)"
+          ></v-img>
         </div>
       </template>
     </v-navigation-drawer>
@@ -32,7 +67,7 @@ export default {
       "https://api.github.com/repos/redbita/redbita.github.io/contents/data/",
     path: "",
     name,
-    machine_info: {},
+    machine_info: null,
     writeup_info: {},
     arrayOfWriteUps: [],
   }),
@@ -44,20 +79,25 @@ export default {
 
     console.log(this.path);
 
-    let name = this.dirPath.slice(this.dirPath.lastIndexOf("/") + 1);
+    var nameWrite = this.$route.params.path.slice(
+      this.path.lastIndexOf("/") + 1
+    );
+    console.log(nameWrite);
     this.name = name.toLowerCase();
     var ind = array
       .map(function (e) {
         return e.name;
       })
-      .indexOf(name);
+      .indexOf(nameWrite);
+
+    console.log(ind);
 
     if (ind >= 0) {
       this.machine_info = array[ind];
-    } else {
-      this.getFolderDetails();
+    } else {      
       this.getWriteUpDetails();
-    }    
+    }
+    this.getFolderDetails();
   },
 
   methods: {
@@ -76,7 +116,8 @@ export default {
           item.name.indexOf(".pdf") > 0
         );
       });
-      this.filePath = this.dirPath.toLowerCase() + "/" + arrayOfWriteUps[0].name;      
+      this.filePath =
+        this.dirPath.toLowerCase() + "/" + arrayOfWriteUps[0].name;
       this.arrayOfWriteUps = arrayOfWriteUps;
     },
     getOSImage: function (a) {
@@ -101,7 +142,7 @@ export default {
       }
     },
     getAuthor: function (id) {
-      return "https://www.hackthebox.eu/badge/image/" + id ;
+      return "https://www.hackthebox.eu/badge/image/" + id;
     },
   },
 };

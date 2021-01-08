@@ -234,7 +234,8 @@ export default {
     active_machines:[],
     active_machines_all:[],
     search: "",
-    loaded: false
+    loaded: false,
+    attrs: false
   }),
 
   mounted: async function () {
@@ -322,7 +323,7 @@ export default {
       if (this.$vuetify.breakpoint.mdAndDown) {
         window.open("https://redbita.github.io/data/machines/" + a.toLowerCase() + ".pdf");
       } else {
-        this.$router.push("/machines/" + a);
+        this.$router.push("/write/machines/" + a);
       }
     },
     update_list: function () {
