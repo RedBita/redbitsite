@@ -22,15 +22,6 @@ Vue.use(VueAnalytics, {
   id: 'G-QD6QZ6D0GX'
 });
 
-axios.interceptors.request.use((config) => {    
-
-  config.auth = {
-    username: 'redbita',
-    password: 'df90cc7577c84cd341479f2169191fefb49c5834'
-  }  
-  return config;
-})
-
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
